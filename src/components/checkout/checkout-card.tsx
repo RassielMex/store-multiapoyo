@@ -21,7 +21,7 @@ export default function CheckoutCard({ product }: { product: CartProduct }) {
           <CardTitle>{product.title}</CardTitle>
           <CardBodyText>{product.price}</CardBodyText>
           <CardBodyText>
-            Subtotal: ${product.count * product.price}
+            Subtotal: ${Math.round(product.count * product.price)}
           </CardBodyText>
         </CardTextWrapper>
       </CardContent>
