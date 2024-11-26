@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartProduct, ProductFromDb } from "../../models/Product";
 
 // Define a type for the slice state
-interface ProductsState {
+interface CartState {
   products: CartProduct[];
 }
 
 // Define the initial state using that type
-const initialState: ProductsState = {
+const initialState: CartState = {
   products: [],
 };
 
