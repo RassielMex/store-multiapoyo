@@ -1,25 +1,14 @@
 import styled from "styled-components";
 import dummyImg from "../../assets/img/dummy.jpeg";
-import Draggable from "react-draggable";
-import { useRef } from "react";
 
 export default function ProductCard() {
-  const nodeRef = useRef(null);
-
   return (
-    <Draggable nodeRef={nodeRef}>
-      <CardContainer
-        ref={nodeRef}
-        onDragStart={() => {
-          console.log("draggin");
-        }}
-      >
-        <CardImage src={dummyImg} />
-        <h4>Titulo</h4>
-        <p>Descripcion</p>
-        <p>Price</p>
-      </CardContainer>
-    </Draggable>
+    <CardContainer>
+      <CardImage src={dummyImg} />
+      <h4>Titulo</h4>
+      <p>Descripcion</p>
+      <p>Price</p>
+    </CardContainer>
   );
 }
 
