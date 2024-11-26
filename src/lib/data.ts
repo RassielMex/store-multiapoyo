@@ -1,5 +1,6 @@
+import { ProductFilter } from "../models/Product";
 import { LoginUser, UserFromDb } from "../models/User";
-import { dataBaseUsers } from "../seed/seed";
+import { dataBaseProducts, dataBaseUsers } from "../seed/seed";
 
 export function getUserFromDb(user: LoginUser) {
   try {
@@ -21,6 +22,45 @@ export function getUserFromDb(user: LoginUser) {
     };
 
     return userFromDb;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export function getProducts(filter?: ProductFilter) {
+  try {
+    let request;
+
+    if (!filter) {
+      request = dataBaseProducts.slice();
+      return request;
+    }
+
+    if (filter.category && filter.search) {
+      const filteredProducts = dataBaseProducts.filter((product) => {
+        return product.title.includes(filter.search!);
+      });
+
+      request = filteredProducts.filter((product) => {
+        return product.title.includes(filter.search!);
+      });
+      return request;
+    }
+
+    if (filter.search) {
+      request = dataBaseProducts.filter((product) => {
+        return product.title.includes(filter.search!);
+      });
+      return request;
+    }
+
+    if (filter.category) {
+      request = dataBaseProducts.filter((product) => {
+        return product.category === filter.category;
+      });
+      return request;
+    }
   } catch (error) {
     console.log(error);
     return null;

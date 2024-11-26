@@ -1,17 +1,35 @@
 import styled from "styled-components";
 import ProductCard from "./product-card";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { retrieveProducts } from "../../store/slices/products-slice";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router";
+import { ProductFilter } from "../../models/Product";
 
 export default function ProductsContainer() {
+  const { products } = useAppSelector((state) => state.product);
+  const [searchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (searchParams.size > 0) {
+      const filter: ProductFilter = {
+        search: searchParams.has("search") ? searchParams.get("search") : "",
+        category: searchParams.has("category")
+          ? parseInt(searchParams.get("category") || "")
+          : null,
+      };
+      dispatch(retrieveProducts(filter));
+    } else {
+      dispatch(retrieveProducts());
+    }
+  }, [dispatch, searchParams]);
+
   return (
     <ProductsGrid $isFavoritesVisible={false}>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {products?.map((product, index) => {
+        return <ProductCard key={product.title + index} product={product} />;
+      })}
     </ProductsGrid>
   );
 }

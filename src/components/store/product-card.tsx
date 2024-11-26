@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import { ProductFromDb } from "../../models/Product";
 import dummyImg from "../../assets/img/dummy.jpeg";
 
-export default function ProductCard() {
+export default function ProductCard({ product }: { product: ProductFromDb }) {
   return (
     <CardContainer>
       <CardImage src={dummyImg} />
-      <h4>Titulo</h4>
-      <p>Descripcion</p>
-      <p>Price</p>
+      <h4>{product.title}</h4>
+      <p>{product.description}</p>
+      <p>${product.price}</p>
       <CardButton>Agregar al carrito</CardButton>
     </CardContainer>
   );
