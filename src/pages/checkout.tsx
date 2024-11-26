@@ -1,6 +1,9 @@
 //import { useState } from "react";
 //import { useNavigate } from "react-router";
 
+import CheckoutContainer from "../components/checkout/checkout-container";
+import StoreNavbar from "../components/shared/store-navbar";
+
 export default function CheckoutPage() {
   //const navigate = useNavigate();
 
@@ -10,5 +13,10 @@ export default function CheckoutPage() {
   //   }
   // }, [isLoggedIn, navigate]);
 
-  return <div>Checkout</div>;
+  return (
+    <>
+      <StoreNavbar />
+      <CheckoutContainer />
+    </>
+  );
 }
