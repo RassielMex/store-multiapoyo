@@ -1,5 +1,6 @@
 import { ProductCategory, ProductFromDb } from "../models/Product";
 import { UserInDb } from "../models/User";
+import { v4 as uuidv4 } from "uuid";
 
 export const dataBaseUsers: UserInDb[] = [
   {
@@ -11,6 +12,7 @@ export const dataBaseUsers: UserInDb[] = [
 
 export const dataBaseProducts: ProductFromDb[] = [
   {
+    id: uuidv4(),
     title: "Gaming Laptop",
     description: "Powerful laptop for demanding games and applications.",
     category: ProductCategory.TECH,
@@ -18,6 +20,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Comfortable T-Shirt",
     description: "Soft and breathable cotton t-shirt for everyday wear.",
     category: ProductCategory.CLOTHING,
@@ -25,6 +28,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Stylish Coffee Mug",
     description:
       "Insulated mug to keep your coffee hot and your hands comfortable.",
@@ -33,6 +37,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Organic Pasta",
     description:
       "Made with high-quality durum wheat for a delicious and healthy meal.",
@@ -41,6 +46,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Wireless Headphones",
     description: "Enjoy crystal-clear audio with freedom of movement.",
     category: ProductCategory.TECH,
@@ -48,6 +54,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Cozy Sweater",
     description: "Warm and snuggly sweater for cooler weather.",
     category: ProductCategory.CLOTHING,
@@ -55,6 +62,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Stainless Steel Cookware Set",
     description: "Durable and versatile cookware for all your cooking needs.",
     category: ProductCategory.HOME,
@@ -62,6 +70,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Fresh Fruit Basket",
     description:
       "Assortment of seasonal fruits for a healthy and refreshing treat.",
@@ -70,6 +79,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Smartwatch",
     description:
       "Track your fitness goals and stay connected with notifications.",
@@ -78,6 +88,7 @@ export const dataBaseProducts: ProductFromDb[] = [
     imgUrl: "../assets/img/dummy.jpeg",
   },
   {
+    id: uuidv4(),
     title: "Stylish Jeans",
     description: "Classic and comfortable jeans for any occasion.",
     category: ProductCategory.CLOTHING,
