@@ -20,6 +20,8 @@ const FiltersWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
   @media (min-width: 650px) {
     flex-direction: row;
   }
