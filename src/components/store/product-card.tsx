@@ -34,13 +34,12 @@ const CardButton = styled.button`
   border-radius: 8px;
   background-color: #4287f5;
   color: white;
-  border: none;
+  border: 1px solid #4287f5;
   font-size: 1rem;
 
   &:hover {
     background-color: #ffff;
     color: #4287f5;
-    border: 1px solid #4287f5;
     cursor: pointer;
   }
 `;
