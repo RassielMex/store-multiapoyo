@@ -74,6 +74,7 @@ export const onLogin = (user: LoginUser) => {
     dispatch(onRequest());
     try {
       const request = getUserFromDb(user);
+      //console.log(request);
       if (request) {
         dispatch(
           logSuccess({
@@ -81,7 +82,9 @@ export const onLogin = (user: LoginUser) => {
             loginDate: Date.now(),
           })
         );
+        return;
       }
+      dispatch(logError("Credenciales Invalidas"));
     } catch (error) {
       console.log(error);
       dispatch(logError("Error al intentar acceder"));
