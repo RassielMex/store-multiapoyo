@@ -21,5 +21,8 @@ const CardContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  height: 180px;
+  height: 120px;
+  @media (min-width: 1224px) {
+    height: 180px;
+  }
 `;
