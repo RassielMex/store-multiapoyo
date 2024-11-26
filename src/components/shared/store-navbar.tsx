@@ -1,14 +1,21 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 export default function StoreNavbar() {
+  const navigate = useNavigate();
+  const handleClickFavorites = () => {};
+  const handleClickCart = () => {
+    navigate("/checkout");
+  };
   return (
     <Navbar>
       <NavTitle>Multiapoyo Store</NavTitle>
       <NavActions>
         <NavButton>Logout</NavButton>
-        <NavButton>Favoritos</NavButton>
+        <NavButton onClick={handleClickFavorites}>Favoritos</NavButton>
         <CartWrapper>
           <CartIcon
+            onClick={handleClickCart}
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
