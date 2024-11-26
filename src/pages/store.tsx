@@ -2,6 +2,7 @@ import styled from "styled-components";
 import StoreNavbar from "../components/shared/store-navbar";
 import ProductsContainer from "../components/store/products-container";
 import Filters from "../components/store/filters";
+//import FavoritesContainer from "../components/store/favorites-container";
 
 export default function StorePage() {
   return (
@@ -9,7 +10,10 @@ export default function StorePage() {
       <StoreNavbar />
       <StoreContainer>
         <Filters />
-        <ProductsContainer />
+        <ProductsWrapper>
+          <ProductsContainer />
+          {/* <FavoritesContainer /> */}
+        </ProductsWrapper>
       </StoreContainer>
     </>
   );
@@ -17,4 +21,8 @@ export default function StorePage() {
 
 const StoreContainer = styled.div`
   margin: 1rem 2rem;
+`;
+
+const ProductsWrapper = styled.div`
+  display: flex;
 `;
