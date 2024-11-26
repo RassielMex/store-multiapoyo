@@ -1,21 +1,36 @@
 import styled from "styled-components";
 import dummyImg from "../../assets/img/dummy.jpeg";
+import { CartProduct } from "../../models/Product";
+import { useAppDispatch } from "../../hooks/redux-hooks";
+import { addItem, deleteItem } from "../../store/slices/cart-slice";
 
-export default function CheckoutCard() {
+export default function CheckoutCard({ product }: { product: CartProduct }) {
+  const dispatch = useAppDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem({ product }));
+  };
+  const handleRemoveItem = () => {
+    dispatch(deleteItem({ product }));
+  };
+
   return (
     <CardContainer>
       <CardContent>
         <CardImage src={dummyImg} />
         <CardTextWrapper>
-          <CardTitle>Titulo</CardTitle>
-          <CardBodyText>Price</CardBodyText>
-          <CardBodyText>subtotal</CardBodyText>
+          <CardTitle>{product.title}</CardTitle>
+          <CardBodyText>{product.price}</CardBodyText>
+          <CardBodyText>
+            Subtotal: ${product.count * product.price}
+          </CardBodyText>
         </CardTextWrapper>
       </CardContent>
       <CardActions>
-        <CardButton>-</CardButton>
-        <ProductQuantity>10</ProductQuantity>
-        <CardButton $right>+</CardButton>
+        <CardButton onClick={handleRemoveItem}>-</CardButton>
+        <ProductQuantity>{product.count}</ProductQuantity>
+        <CardButton $right onClick={handleAddItem}>
+          +
+        </CardButton>
       </CardActions>
     </CardContainer>
   );

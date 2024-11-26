@@ -1,4 +1,5 @@
 export interface ProductFromDb {
+  id: string;
   title: string;
   description: string;
   price: number;
@@ -16,4 +17,8 @@ export enum ProductCategory {
 export interface ProductFilter {
   search?: string | null;
   category?: ProductCategory | null;
+}
+
+export interface CartProduct extends ProductFromDb {
+  count: number;
 }

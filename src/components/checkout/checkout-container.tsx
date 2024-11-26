@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import CheckoutCard from "./checkout-card";
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 export default function CheckoutContainer() {
+  const { products } = useAppSelector((state) => state.cart);
   return (
     <CheckoutWrapper>
       <div>
-        <CheckoutCard />
-        <CheckoutCard />
-        <CheckoutCard />
-        <CheckoutCard />
+        {products.map((product) => {
+          return <CheckoutCard key={product.id} product={product} />;
+        })}
       </div>
       <TextWrapper>
         <span>Total: </span>

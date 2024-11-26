@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { ProductFromDb } from "../../models/Product";
 import dummyImg from "../../assets/img/dummy.jpeg";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/slices/cart-slice";
 
 export default function ProductCard({ product }: { product: ProductFromDb }) {
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addItem({ product }));
+  };
   return (
     <CardContainer>
       <CardImage src={dummyImg} />
       <h4>{product.title}</h4>
       <p>{product.description}</p>
       <p>${product.price}</p>
-      <CardButton>Agregar al carrito</CardButton>
+      <CardButton onClick={handleAddToCart}>Agregar al carrito</CardButton>
     </CardContainer>
   );
 }
