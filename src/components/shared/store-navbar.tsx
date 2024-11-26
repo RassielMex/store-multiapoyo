@@ -5,7 +5,8 @@ export default function StoreNavbar() {
     <Navbar>
       <NavTitle>Multiapoyo Store</NavTitle>
       <NavActions>
-        <LogoutButton>Logout</LogoutButton>
+        <NavButton>Logout</NavButton>
+        <NavButton>Favoritos</NavButton>
         <CartWrapper>
           <CartIcon
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +37,7 @@ const NavTitle = styled.h4`
   font-size: 1.5rem;
 `;
 
-const LogoutButton = styled.button`
+const NavButton = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   background-color: #4287f5;
