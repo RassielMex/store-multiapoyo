@@ -9,9 +9,9 @@ interface LoginState {
   isLoggedIn: boolean;
   error: boolean;
   message: string;
-  user: UserFromDb | null;
   loading: boolean;
   loginDate: number;
+  user: UserFromDb | null;
 }
 
 // Define the initial state using that type
@@ -19,9 +19,9 @@ const initialState: LoginState = {
   isLoggedIn: false,
   error: false,
   message: "",
-  user: null,
   loading: false,
   loginDate: 0,
+  user: null,
 };
 
 export const loginSlice = createSlice({
@@ -39,13 +39,13 @@ export const loginSlice = createSlice({
       state.isLoggedIn = true;
       state.error = false;
       state.message = "Success";
-      state.user = action.payload.user;
       state.loginDate = action.payload.loginDate;
     },
     logError: (state, action: PayloadAction<string>) => {
       state.error = true;
       state.message = action.payload;
       state.loading = false;
+      state.isLoggedIn = false;
     },
     logOut: (state) => {
       state.isLoggedIn = false;
@@ -53,17 +53,12 @@ export const loginSlice = createSlice({
       state.message = "";
       state.loading = false;
     },
+    sessionActive: (state, action: PayloadAction<UserFromDb>) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+    },
     onRequest: (state) => {
       state.loading = true;
-    },
-    replaceToken: (
-      state,
-      action: PayloadAction<{ accesToken: string; refreshDate: number }>
-    ) => {
-      if (state.user) {
-        state.user.accessToken = action.payload.accesToken;
-        state.loginDate = action.payload.refreshDate;
-      }
     },
   },
 });
@@ -76,6 +71,8 @@ export const onLogin = (user: LoginUser) => {
       const request = getUserFromDb(user);
       //console.log(request);
       if (request) {
+        const user = JSON.stringify(request);
+        sessionStorage.setItem("user", user);
         dispatch(
           logSuccess({
             user: request,
@@ -89,6 +86,25 @@ export const onLogin = (user: LoginUser) => {
       console.log(error);
       dispatch(logError("Error al intentar acceder"));
     }
+  };
+};
+
+export const getSession = () => {
+  return (dispatch: AppDispatch) => {
+    const userFromStorage = sessionStorage.getItem("user");
+    if (!userFromStorage) {
+      dispatch(logError("No existe session activa"));
+      return null;
+    }
+    const user = JSON.parse(userFromStorage) as UserFromDb;
+    dispatch(sessionActive(user));
+  };
+};
+
+export const clearSession = () => {
+  return (dispatch: AppDispatch) => {
+    sessionStorage.removeItem("user");
+    dispatch(logOut());
   };
 };
 
@@ -117,7 +133,7 @@ export const onLogin = (user: LoginUser) => {
 //   };
 // };
 
-export const { logSuccess, logOut, logError, onRequest, replaceToken } =
+export const { logSuccess, logOut, logError, onRequest, sessionActive } =
   loginSlice.actions;
 
 export default loginSlice.reducer;

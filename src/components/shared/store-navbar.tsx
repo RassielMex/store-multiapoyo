@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import { logOut } from "../../store/slices/login-slice";
+import { clearSession } from "../../store/slices/login-slice";
 import { toggleFavorites } from "../../store/slices/favorites-slices";
 
 export default function StoreNavbar() {
@@ -16,7 +16,7 @@ export default function StoreNavbar() {
     navigate("/checkout");
   };
   const handleLogout = () => {
-    dispatch(logOut());
+    dispatch(clearSession());
   };
 
   return (
