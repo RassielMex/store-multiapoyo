@@ -9,8 +9,13 @@ export default function ProductCard({ product }: { product: ProductFromDb }) {
   const handleAddToCart = () => {
     dispatch(addItem({ product }));
   };
+
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData("id", product.id);
+  };
+
   return (
-    <CardContainer>
+    <CardContainer draggable onDragStart={handleDragStart}>
       <CardImage src={dummyImg} />
       <h4>{product.title}</h4>
       <p>{product.description}</p>
@@ -26,6 +31,7 @@ const CardContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   width: fit-content;
+  height: fit-content;
 `;
 
 const CardImage = styled.img`

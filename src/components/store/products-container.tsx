@@ -5,6 +5,7 @@ import { retrieveProducts } from "../../store/slices/products-slice";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { ProductFilter } from "../../models/Product";
+import { deleteFavItem } from "../../store/slices/favorites-slices";
 
 export default function ProductsContainer() {
   const { products } = useAppSelector((state) => state.product);
@@ -25,8 +26,20 @@ export default function ProductsContainer() {
     }
   }, [dispatch, searchParams]);
 
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const id = event.dataTransfer.getData("id");
+    dispatch(deleteFavItem({ productId: id }));
+  };
+
   return (
-    <ProductsGrid $isFavoritesVisible={false}>
+    <ProductsGrid
+      $isFavoritesVisible={false}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       {products?.map((product, index) => {
         return <ProductCard key={product.title + index} product={product} />;
       })}

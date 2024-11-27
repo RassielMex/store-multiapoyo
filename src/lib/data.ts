@@ -66,3 +66,18 @@ export function getProducts(filter?: ProductFilter) {
     return null;
   }
 }
+
+export function getProductById(producId: string) {
+  try {
+    const request = dataBaseProducts.find((product) => {
+      return product.id === producId;
+    });
+    if (!request) {
+      return null;
+    }
+    return request;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

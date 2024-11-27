@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import dummyImg from "../../assets/img/dummy.jpeg";
+import { ProductFromDb } from "../../models/Product";
 
-export default function FavoriteCard() {
+export default function FavoriteCard({ product }: { product: ProductFromDb }) {
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData("id", product.id);
+  };
+
   return (
-    <CardContainer>
-      <CardTitle>Titulo</CardTitle>
+    <CardContainer draggable onDragStart={handleDragStart}>
+      <CardTitle>{product.title}</CardTitle>
       <CardImage src={dummyImg} />
     </CardContainer>
   );
