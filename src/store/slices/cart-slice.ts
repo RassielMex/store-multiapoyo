@@ -22,10 +22,13 @@ export const cartSlice = createSlice({
       state,
       action: PayloadAction<{ product: CartProduct | ProductFromDb }>
     ) => {
+      //Check for existing
       const existsProduct = state.products.find((product) => {
         return product.id === action.payload.product.id;
       });
+
       if (existsProduct) {
+        //find and increment count
         const stateCopy = state.products.map((product) => {
           if (product.id === action.payload.product.id) {
             return { ...product, count: product.count + 1 };
@@ -34,6 +37,7 @@ export const cartSlice = createSlice({
         });
         state.products = stateCopy.slice();
       } else {
+        //Add and increment count
         const stateCopy = state.products.slice();
         const newProduct: CartProduct = {
           ...action.payload.product,
@@ -48,29 +52,28 @@ export const cartSlice = createSlice({
       state,
       action: PayloadAction<{ product: CartProduct | ProductFromDb }>
     ) => {
+      //Check for existing
       const existsProduct = state.products.find((product) => {
         return product.id === action.payload.product.id;
       });
+
       if (existsProduct) {
+        //find and decrement count
         const stateCopy = state.products.map((product) => {
           if (product.id === action.payload.product.id) {
             return { ...product, count: product.count - 1 };
           }
           return product;
         });
+        //only saves ones with count >0
         state.products = stateCopy.filter((product) => {
           return product.count > 0;
         });
-      } else {
-        const stateCopy = state.products.slice();
-        const newProduct: CartProduct = {
-          ...action.payload.product,
-          count: 1,
-        };
-        stateCopy.push(newProduct);
-      }
-      if (state.itemsCount > 0) {
-        state.itemsCount = state.itemsCount - 1;
+
+        //decrement general count
+        if (state.itemsCount > 0) {
+          state.itemsCount = state.itemsCount - 1;
+        }
       }
     },
   },

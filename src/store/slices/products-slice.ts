@@ -21,7 +21,6 @@ const initialState: ProductsState = {
 
 export const productSlice = createSlice({
   name: "products",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     retrieveSuccess: (
@@ -51,13 +50,12 @@ export const productSlice = createSlice({
   },
 });
 
-// Other code such as selectors can use the imported `RootState` type
 export const retrieveProducts = (filter?: ProductFilter) => {
   return async (dispatch: AppDispatch) => {
     dispatch(onRequest());
     try {
+      //Get products
       const request = filter ? getProducts(filter) : getProducts();
-      //console.log(request);
       if (request) {
         dispatch(
           retrieveSuccess({

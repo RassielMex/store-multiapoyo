@@ -23,7 +23,6 @@ const initialState: FavoriteState = {
 
 export const favoriteSlice = createSlice({
   name: "favorites",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     onRequest: (state) => {
@@ -68,8 +67,8 @@ export const setFavoriteProduct = (productId: string) => {
   return async (dispatch: AppDispatch) => {
     dispatch(onRequest());
     try {
+      //get product
       const request = getProductById(productId);
-      //console.log(request);
       if (request) {
         dispatch(addFavItem({ product: request }));
         return;

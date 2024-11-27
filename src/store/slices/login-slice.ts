@@ -26,7 +26,6 @@ const initialState: LoginState = {
 
 export const loginSlice = createSlice({
   name: "login",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     logSuccess: (
@@ -63,7 +62,7 @@ export const loginSlice = createSlice({
   },
 });
 
-// Other code such as selectors can use the imported `RootState` type
+//Selectors
 export const onLogin = (user: LoginUser) => {
   return async (dispatch: AppDispatch) => {
     dispatch(onRequest());
@@ -71,6 +70,7 @@ export const onLogin = (user: LoginUser) => {
       const request = getUserFromDb(user);
       //console.log(request);
       if (request) {
+        //save in session storage and dispatch success
         const user = JSON.stringify(request);
         sessionStorage.setItem("user", user);
         dispatch(
@@ -91,10 +91,11 @@ export const onLogin = (user: LoginUser) => {
 
 export const getSession = () => {
   return (dispatch: AppDispatch) => {
+    //Get existing user
     const userFromStorage = sessionStorage.getItem("user");
     if (!userFromStorage) {
       dispatch(logError("No existe session activa"));
-      return null;
+      return;
     }
     const user = JSON.parse(userFromStorage) as UserFromDb;
     dispatch(sessionActive(user));
@@ -107,31 +108,6 @@ export const clearSession = () => {
     dispatch(logOut());
   };
 };
-
-// export const requestNewToken = (refreshToken: string, loginDate: number) => {
-//   return async (dispatch: AppDispatch) => {
-//     if (Date.now() - loginDate >= 3600000) {
-//       console.log("new token...");
-//       try {
-//         const request = await axios.post(
-//           process.env.REACT_APP_API_BASE + "/user/token/refresh/",
-//           { refresh: refreshToken }
-//         );
-//         if (request.status === 200) {
-//           console.log(request.data);
-//           dispatch(
-//             replaceToken({
-//               accesToken: request.data?.access,
-//               refreshDate: Date.now(),
-//             })
-//           );
-//         }
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     }
-//   };
-// };
 
 export const { logSuccess, logOut, logError, onRequest, sessionActive } =
   loginSlice.actions;
