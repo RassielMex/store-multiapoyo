@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import styled from "styled-components";
-import { useAppDispatch } from "../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { logOut } from "../../store/slices/login-slice";
 
 export default function StoreNavbar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { itemsCount } = useAppSelector((state) => state.cart);
+
   const handleClickFavorites = () => {};
   const handleClickCart = () => {
     navigate("/checkout");
@@ -16,7 +18,9 @@ export default function StoreNavbar() {
 
   return (
     <Navbar>
-      <NavTitle>Multiapoyo Store</NavTitle>
+      <NavLink to={"/"} style={{ textDecoration: "none" }}>
+        <NavTitle>Multiapoyo Store</NavTitle>
+      </NavLink>
       <NavActions>
         <NavButton onClick={handleLogout}>Logout</NavButton>
         <NavButton onClick={handleClickFavorites}>Favoritos</NavButton>
@@ -31,7 +35,7 @@ export default function StoreNavbar() {
           >
             <path d="M239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM88,200a16,16,0,1,0,16,16A16,16,0,0,0,88,200Zm104,0a16,16,0,1,0,16,16A16,16,0,0,0,192,200Z"></path>
           </CartIcon>
-          <CartItems>4</CartItems>
+          <CartItems>{itemsCount > 0 ? itemsCount : ""}</CartItems>
         </CartWrapper>
       </NavActions>
     </Navbar>

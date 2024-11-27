@@ -4,11 +4,13 @@ import { CartProduct, ProductFromDb } from "../../models/Product";
 // Define a type for the slice state
 interface CartState {
   products: CartProduct[];
+  itemsCount: number;
 }
 
 // Define the initial state using that type
 const initialState: CartState = {
   products: [],
+  itemsCount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -40,6 +42,7 @@ export const cartSlice = createSlice({
         stateCopy.push(newProduct);
         state.products = stateCopy.slice();
       }
+      state.itemsCount = state.itemsCount + 1;
     },
     deleteItem: (
       state,
@@ -65,6 +68,9 @@ export const cartSlice = createSlice({
           count: 1,
         };
         stateCopy.push(newProduct);
+      }
+      if (state.itemsCount > 0) {
+        state.itemsCount = state.itemsCount - 1;
       }
     },
   },
