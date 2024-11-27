@@ -3,7 +3,7 @@ import CheckoutCard from "./checkout-card";
 import { useAppSelector } from "../../hooks/redux-hooks";
 
 export default function CheckoutContainer() {
-  const { products } = useAppSelector((state) => state.cart);
+  const { products, totalPrice } = useAppSelector((state) => state.cart);
   return (
     <CheckoutWrapper>
       <div>
@@ -13,7 +13,7 @@ export default function CheckoutContainer() {
       </div>
       <TextWrapper>
         <span>Total: </span>
-        <span>$1000</span>
+        <span>${totalPrice}</span>
       </TextWrapper>
     </CheckoutWrapper>
   );

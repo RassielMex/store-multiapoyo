@@ -5,12 +5,14 @@ import { CartProduct, ProductFromDb } from "../../models/Product";
 interface CartState {
   products: CartProduct[];
   itemsCount: number;
+  totalPrice: number;
 }
 
 // Define the initial state using that type
 const initialState: CartState = {
   products: [],
   itemsCount: 0,
+  totalPrice: 0,
 };
 
 export const cartSlice = createSlice({
@@ -46,7 +48,9 @@ export const cartSlice = createSlice({
         stateCopy.push(newProduct);
         state.products = stateCopy.slice();
       }
+      //update total price and items count
       state.itemsCount = state.itemsCount + 1;
+      state.totalPrice = getTotalPrice(state.products);
     },
     deleteItem: (
       state,
@@ -74,10 +78,25 @@ export const cartSlice = createSlice({
         if (state.itemsCount > 0) {
           state.itemsCount = state.itemsCount - 1;
         }
+        //update total price
+        state.totalPrice = getTotalPrice(state.products);
       }
     },
   },
 });
+
+const getTotalPrice = (products: CartProduct[]) => {
+  if (products.length > 0) {
+    const totalPerProduct = products.map((product) => {
+      return product.count * product.price;
+    });
+    const total = totalPerProduct.reduce((prev, curr) => {
+      return prev + curr;
+    });
+    return Math.round(total);
+  }
+  return 0;
+};
 
 export const { addItem, deleteItem } = cartSlice.actions;
 
