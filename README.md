@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Store Multiapoyo
 
 Proyeccto generado a partid de
 
