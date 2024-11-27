@@ -63,7 +63,12 @@ export default function LoginPage() {
             errorMsg.email.map((er, index) => {
               return <ErrorMessage key={er + index}>{er}</ErrorMessage>;
             })}
-          <InputForm placeholder="password" name="password" id="password" />
+          <InputForm
+            placeholder="password"
+            name="password"
+            id="password"
+            type="password"
+          />
           {errorMsg?.password &&
             errorMsg.password.map((er, index) => {
               return <ErrorMessage key={er + index}>{er}</ErrorMessage>;
