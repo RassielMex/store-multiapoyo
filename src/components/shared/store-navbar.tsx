@@ -2,13 +2,16 @@ import { NavLink, useNavigate } from "react-router";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { logOut } from "../../store/slices/login-slice";
+import { toggleFavorites } from "../../store/slices/favorites-slices";
 
 export default function StoreNavbar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { itemsCount } = useAppSelector((state) => state.cart);
 
-  const handleClickFavorites = () => {};
+  const handleClickFavorites = () => {
+    dispatch(toggleFavorites());
+  };
   const handleClickCart = () => {
     navigate("/checkout");
   };

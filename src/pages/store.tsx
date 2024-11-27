@@ -2,9 +2,12 @@ import styled from "styled-components";
 import StoreNavbar from "../components/shared/store-navbar";
 import ProductsContainer from "../components/store/products-container";
 import Filters from "../components/store/filters";
-//import FavoritesContainer from "../components/store/favorites-container";
+import { useAppSelector } from "../hooks/redux-hooks";
+import FavoritesContainer from "../components/store/favorites-container";
 
 export default function StorePage() {
+  const { showFavorites } = useAppSelector((state) => state.favorite);
+
   return (
     <>
       <StoreNavbar />
@@ -12,7 +15,7 @@ export default function StorePage() {
         <Filters />
         <ProductsWrapper>
           <ProductsContainer />
-          {/* <FavoritesContainer /> */}
+          {showFavorites && <FavoritesContainer />}
         </ProductsWrapper>
       </StoreContainer>
     </>
