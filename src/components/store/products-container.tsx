@@ -14,6 +14,7 @@ export default function ProductsContainer() {
 
   useEffect(() => {
     if (searchParams.size > 0) {
+      //Set filter accordin to search params values
       const filter: ProductFilter = {
         search: searchParams.has("search") ? searchParams.get("search") : "",
         category: searchParams.has("category")
@@ -22,10 +23,12 @@ export default function ProductsContainer() {
       };
       dispatch(retrieveProducts(filter));
     } else {
+      //send empty dispatch
       dispatch(retrieveProducts());
     }
   }, [dispatch, searchParams]);
 
+  //Drag and drop handlers
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };

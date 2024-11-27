@@ -32,22 +32,24 @@ export default function LoginPage() {
   const handlesubmit = (event: FormEvent) => {
     event.preventDefault();
 
+    //Get data and parse
     const formData = new FormData(ref.current!);
     const data = Object.fromEntries(formData);
-    //console.log(data);
     const parse = loginSchema.safeParse(data);
 
     if (!parse.success) {
+      //return errors
       const errors = parse.error.flatten().fieldErrors;
-      //console.log(errors);
       setErrorMsg({ email: errors.email, password: errors.password });
       return;
     }
+    //Clear error and login
     setErrorMsg({ email: [], password: [] });
     dispatch(onLogin(parse.data));
   };
 
   useEffect(() => {
+    //Redictect if logged
     if (isLoggedIn) {
       navigate("/");
     }

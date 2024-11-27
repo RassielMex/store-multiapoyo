@@ -11,25 +11,28 @@ export default function Filters() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = useDebouncedCallback(() => {
+    //Set params accroding to current value
     const search = inputRef.current?.value;
     if (search) {
       searchParams.set("search", search);
     } else {
       searchParams.delete("search");
     }
+    //Redirect
     navigate(`${location.pathname}?${searchParams.toString()}`, {
       replace: true,
     });
   }, 500);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    //Set params accroding to current value
     const category = event.currentTarget?.value;
-
     if (category) {
       searchParams.set("category", event.currentTarget.value);
     } else {
       searchParams.delete("category");
     }
+    //Redirect
     navigate(`${location.pathname}?${searchParams.toString()}`, {
       replace: true,
     });
