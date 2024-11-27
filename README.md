@@ -20,7 +20,7 @@ Proyecto generado como prueba
 Clona el repositorio y ejecuta:
 
 ```bash
-  cd next_groscrum
+  cd store-multiapoyo
   pnpm install
   pnpm run dev
 ```
