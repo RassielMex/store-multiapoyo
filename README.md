@@ -22,7 +22,7 @@ Clona el repositorio y ejecuta:
 ```bash
   cd next_groscrum
   pnpm install
-  pnpm run:dev
+  pnpm run dev
 ```
 
 Ve al navegador y abre: http://localhost:5173/
