@@ -1,9 +1,13 @@
 # Store Multiapoyo
 
-Proyeccto generado a partid de
+Proyecto generado como prueba
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- Flujo de login para el usuario
+- Carrito de compras
+- Visualiazcion de favoritos y drag and drop
+- Busqueda y filtrado de productos
 
 ## Tecnologias usadas
 
