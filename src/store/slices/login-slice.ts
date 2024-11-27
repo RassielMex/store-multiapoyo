@@ -94,7 +94,7 @@ export const getSession = () => {
     //Get existing user
     const userFromStorage = sessionStorage.getItem("user");
     if (!userFromStorage) {
-      dispatch(logError("No existe session activa"));
+      dispatch(logError(""));
       return;
     }
     const user = JSON.parse(userFromStorage) as UserFromDb;
