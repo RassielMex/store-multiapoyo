@@ -39,18 +39,22 @@ export function getProducts(filter?: ProductFilter) {
 
     if (filter.category && filter.search) {
       const filteredProducts = dataBaseProducts.filter((product) => {
-        return product.title.includes(filter.search!);
+        const filterSearch = filter.search!;
+        return product.title
+          .toLowerCase()
+          .includes(filterSearch.toLocaleLowerCase());
       });
 
       request = filteredProducts.filter((product) => {
-        return product.title.includes(filter.search!);
+        return product.category === filter.category;
       });
       return request;
     }
 
     if (filter.search) {
       request = dataBaseProducts.filter((product) => {
-        return product.title.includes(filter.search!);
+        const filterSearch = filter.search!;
+        return product.title.toLowerCase().includes(filterSearch.toLowerCase());
       });
       return request;
     }
