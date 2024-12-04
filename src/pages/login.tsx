@@ -9,7 +9,7 @@ import {
 } from "../components/login/login-components";
 import { loginSchema } from "../models/login-schema";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { onLogin } from "../store/slices/login-slice";
+import { getSession, onLogin } from "../store/slices/login-slice";
 import { useNavigate } from "react-router";
 
 type ErrorMessages = {
@@ -47,6 +47,11 @@ export default function LoginPage() {
     setErrorMsg({ email: [], password: [] });
     dispatch(onLogin(parse.data));
   };
+
+  useEffect(() => {
+    //get session
+    dispatch(getSession());
+  }, [dispatch]);
 
   useEffect(() => {
     //Redictect if logged
