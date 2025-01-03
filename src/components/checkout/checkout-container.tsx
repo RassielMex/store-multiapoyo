@@ -6,6 +6,9 @@ export default function CheckoutContainer() {
   const { products, totalPrice } = useAppSelector((state) => state.cart);
   return (
     <CheckoutWrapper>
+      <TextWrapper>
+        <span>Test de branches</span>
+      </TextWrapper>
       <div>
         {products.map((product) => {
           return <CheckoutCard key={product.id} product={product} />;
